@@ -3,10 +3,69 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='styles.css') }}"
+    />
     <title>Apartment Bus Predictions</title>
   </head>
   <body>
-    <h1>{{ monatiquotStr }}</h1>
-    <h1>{{ westStreetStr }}</h1>
+    <div class="container page-content">
+      <div class="header page-header">
+        <div class="row">
+          <div class="pageTitle col-md-12">
+            <img
+              style="max-width: 20%; height: auto"
+              class="mx-auto d-block"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/MBTA.svg/800px-MBTA.svg.png"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <section class="pricing py-5">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="card mb-5 mb-lg-0">
+                  <div class="card-body rounded">
+                    <a href="https://github.com/jpbates13/ubored"
+                      ><h5 class="card-title text-muted text-center">
+                        {{ monatiquotName }}
+                      </h5></a
+                    >
+                    <h6 class="card-price text-center">To Braintree</h6>
+                    <hr />
+                    <p>{{ monatiquotStr }}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="card mb-5 mb-lg-0">
+                  <div class="card-body rounded">
+                    <a href="https://github.com/jpbates13/jpbates13.github.io"
+                      ><h5 class="card-title text-muted text-center">
+                        {{ westStreetName}}
+                      </h5></a
+                    >
+                    <h6 class="card-price text-center">To Quincy Center</h6>
+                    <hr />
+                    <p>{{ westStreetStr }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
   </body>
 </html>

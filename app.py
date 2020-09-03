@@ -33,16 +33,16 @@ def main():
 
     print(monatiquotStr)
     print(westStreetStr)
-    return render_template('index.html', monatiquotStr=monatiquotStr, westStreetStr=westStreetStr)
+    return render_template('index.html', monatiquotStr=monatiquotStr, westStreetStr=westStreetStr, monatiquotName=monatiquotResp.json()['included'][0]['attributes']['name'], westStreetName=westStreetResp.json()['included'][0]['attributes']['name'])
 
 
 def constructString(stop, stopDetails):
     returnStr = ""
     name = stopDetails[0]['attributes']['name']
     if not stop:
-        returnStr = "No busses arriving at " + name + " at the moment"
+        returnStr = "No busses arriving at the moment"
         return returnStr
-    returnStr = "Bus arriving at " + name + " at "
+    returnStr = "Bus arriving at "
     index = 0
     for arrivals in stop:
         if (arrivals['attributes']['arrival_time']) == None:
