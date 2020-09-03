@@ -65,9 +65,22 @@ def dateCleanup(date):
     rd = relativedelta(cleanDate, today)
     timeUntilMinutes = rd.days * 24 * 60 + rd.hours * 60 + rd.minutes
     timeUntilSeconds = rd.seconds
-    cleanDateStr = str(cleanDate.hour) + ":" + str(cleanDate.minute) + \
-        " (in " + str(timeUntilMinutes) + " minutes and " + \
-        str(timeUntilSeconds) + " seconds)"
+    if(cleanDate.hour < 12 and cleanDate.hour != 0):
+        cleanDateStr = str(cleanDate.hour) + ":" + str(cleanDate.minute) + \
+            "am (in am" + str(timeUntilMinutes) + " minutes and " + \
+            str(timeUntilSeconds) + " seconds)"
+    elif cleanDate.hour == 12:
+        cleanDateStr = str(cleanDate.hour) + ":" + str(cleanDate.minute) + \
+            "pm (in " + str(timeUntilMinutes) + " minutes and " + \
+            str(timeUntilSeconds) + " seconds)"
+    elif cleanDate.hour == 0:
+        cleanDateStr = "12" + ":" + str(cleanDate.minute) + \
+            "am (in " + str(timeUntilMinutes) + " minutes and " + \
+            str(timeUntilSeconds) + " seconds)"
+    else:
+        cleanDateStr = str(cleanDate.hour - 12) + ":" + str(cleanDate.minute) + \
+            "pm (in " + str(timeUntilMinutes) + " minutes and " + \
+            str(timeUntilSeconds) + " seconds)"
     return cleanDateStr
 
 
