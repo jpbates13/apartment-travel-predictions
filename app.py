@@ -14,18 +14,19 @@ f = open("API_KEY.txt")
 API_KEY = f.read()
 monatiquotApiCall = "https://api-v3.mbta.com/predictions?filter[stop]=3863&filter[direction_id]=0&include=stop&api_key=" + API_KEY
 westStreetApiCall = "https://api-v3.mbta.com/predictions?filter[stop]=3935&filter[direction_id]=1&include=stop&api_key=" + API_KEY
-monatiquotResp = requests.get(monatiquotApiCall)
-westStreetResp = requests.get(westStreetApiCall)
-monatiquot = monatiquotResp.json()['data']
-westStreet = westStreetResp.json()['data']
-monatiquotIncl = monatiquotResp.json()['included']
-westStreetIncl = westStreetResp.json()['included']
-monatiquotStr = ""
-westStreetStr = ""
 
 
 @app.route("/")
 def main():
+    monatiquotResp = requests.get(monatiquotApiCall)
+    westStreetResp = requests.get(westStreetApiCall)
+    monatiquot = monatiquotResp.json()['data']
+    westStreet = westStreetResp.json()['data']
+    monatiquotIncl = monatiquotResp.json()['included']
+    westStreetIncl = westStreetResp.json()['included']
+    monatiquotStr = ""
+    westStreetStr = ""
+
     print(monatiquotResp.status_code)
     print(westStreetResp.status_code)
 
