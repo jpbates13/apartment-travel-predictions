@@ -47,17 +47,6 @@ def constructString(stop, stopDetails):
     returnStr = "Bus arriving at "
     index = 0
     for arrivals in stop:
-
-        # this was here to fix a glitch where times wuld sometimes be negative
-        # probably not the cleanest way, but it fixes the problem
-        cleanDate = dateutil.parser.parse(
-            arrivals['attributes']['arrival_time'])
-        today = datetime.datetime.today()
-        today = eastern.localize(today)
-        rd = relativedelta(cleanDate, today)
-        if(rd.seconds < 0 or rd.minutes < 0 or rd.hours < 0 or rd.days):
-            continue
-
         if (arrivals['attributes']['arrival_time']) == None:
             continue
         if(index == 0):
