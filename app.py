@@ -72,7 +72,7 @@ def dateCleanup(date):
         cleanMinute = "0" + str(cleanDate.minute)
     if(cleanDate.hour < 12 and cleanDate.hour != 0):
         cleanDateStr = str(cleanDate.hour) + ":" + cleanMinute + \
-            "am (in am" + str(timeUntilMinutes) + " minutes and " + \
+            "am (in " + str(timeUntilMinutes) + " minutes and " + \
             str(timeUntilSeconds) + " seconds)"
     elif cleanDate.hour == 12:
         cleanDateStr = str(cleanDate.hour) + ":" + cleanMinute + \
