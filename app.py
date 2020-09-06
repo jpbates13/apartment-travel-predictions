@@ -20,22 +20,36 @@ westStreetApiCall = "https://api-v3.mbta.com/predictions?filter[stop]=3935&filte
 def main():
     monatiquotResp = requests.get(monatiquotApiCall)
     westStreetResp = requests.get(westStreetApiCall)
-    monatiquot = monatiquotResp.json()['data']
-    westStreet = westStreetResp.json()['data']
-    monatiquotIncl = monatiquotResp.json()['included']
-    westStreetIncl = westStreetResp.json()['included']
+    if('data' in monatiquotResp.json() and 'included' in monatiquotResp.json()):
+        monatiquot = monatiquotResp.json()['data']
+        monatiquotIncl = monatiquotResp.json()['included']
+        monatiquotSuccess = True
+    else:
+        monatiquotSuccess = False
+    if('data' in westStreetResp.json() and 'included' in westStreetResp.json()):
+        westStreet = westStreetResp.json()['data']
+        westStreetIncl = westStreetResp.json()['included']
+        westStreetSuccess = True
+    else:
+        westStreetSuccess = False
     monatiquotStr = ""
     westStreetStr = ""
-
-    print(monatiquotResp.status_code)
-    print(westStreetResp.status_code)
-
-    monatiquotStr = constructString(monatiquot, monatiquotIncl)
-    westStreetStr = constructString(westStreet, westStreetIncl)
+    if monatiquotSuccess:
+        monatiquotName = monatiquotResp.json(
+        )['included'][0]['attributes']['name']
+        monatiquotStr = constructString(monatiquot, monatiquotIncl)
+    else:
+        monatiquotName = "Invalid API Response (Probably no busses coming for a while)"
+    if westStreetSuccess:
+        westStreetName = westStreetResp.json(
+        )['included'][0]['attributes']['name']
+        westStreetStr = constructString(westStreet, westStreetIncl)
+    else:
+        westStreetName = "Invalid API Response (Probably no busses coming for a while)"
 
     print(monatiquotStr)
     print(westStreetStr)
-    return render_template('index.html', monatiquotStr=monatiquotStr, westStreetStr=westStreetStr, monatiquotName=monatiquotResp.json()['included'][0]['attributes']['name'], westStreetName=westStreetResp.json()['included'][0]['attributes']['name'])
+    return render_template('index.html', monatiquotStr=monatiquotStr, westStreetStr=westStreetStr, monatiquotName=monatiquotName, westStreetName=westStreetName)
 
 
 def constructString(stop, stopDetails):
